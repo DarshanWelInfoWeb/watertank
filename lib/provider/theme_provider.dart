@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:watertankclening/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
 
 class ThemeProvider with ChangeNotifier {
   final SharedPreferences sharedPreferences;

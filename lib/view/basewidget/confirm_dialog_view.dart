@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:watertankclening/utill/styles.dart';
-
+import 'package:water_tank_clean_service/utill/styles.dart';
 import '../../utill/color_resources.dart';
 import '../../utill/dimensions.dart';
 

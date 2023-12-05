@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:watertankclening/view/basewidget/confirm_dialog_view.dart';
+import 'package:water_tank_clean_service/data/model/response/language_model.dart';
+import 'package:water_tank_clean_service/view/basewidget/confirm_dialog_view.dart';
 
 
 class AppConstants {
 
-  static const String APP_NAME = 'Water Tank Cleaning';
+  static const String APP_NAME = 'A-ONE Water Tank Cleaning';
   static const String BASE_URL = 'http://api.welinfoweb.in/';
   static const String LOGIN_URI = 'Api/Login/UserLogin';
   /* Customer */
@@ -56,10 +57,16 @@ class AppConstants {
   static const String lName = 'lname';
   static const String companyName = 'cname';
   static const int companyId = 0;
+  static const String COUNTRY_CODE = 'country_code';
+  static const String LANGUAGE_CODE = 'language_code';
 
   static var screenSize;
   static double itemHeight=0.0;
   static double itemWidth=0.0;
+
+  static List<LanguageModel> languages = [
+    LanguageModel(imageUrl: '', languageName: 'English', countryCode: 'US', languageCode: 'en'),
+  ];
 
 
   static bool isNotValid(String email) {

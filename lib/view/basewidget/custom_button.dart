@@ -65,3 +65,20 @@ class CustomButtonFuction extends StatelessWidget {
     );
   }
 }
+
+
+class TitleButton extends StatelessWidget {
+  final String? image;
+  final String? title;
+  final Widget navigateTo;
+  TitleButton({@required this.image, @required this.title, required this.navigateTo});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Image.asset("$image", width: 25, height: 25, fit: BoxFit.fill, color: ColorResources.getHomeBg(context)),
+      title: Text("$title", style: montserratRegular.copyWith(fontSize: Dimensions.FONT_SIZE_17)),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => navigateTo),),
+    );
+  }
+}

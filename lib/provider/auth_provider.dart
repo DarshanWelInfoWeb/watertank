@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:watertankclening/data/model/body/login_body.dart';
-import 'package:watertankclening/data/model/response/base/api_response.dart';
-import 'package:watertankclening/data/repository/auth_repo.dart';
-import 'package:watertankclening/helper/preferenceutils.dart';
-import 'package:watertankclening/utill/app_constants.dart';
+import 'package:water_tank_clean_service/data/model/body/login_body.dart';
+import 'package:water_tank_clean_service/data/model/response/base/api_response.dart';
+import 'package:water_tank_clean_service/data/repository/auth_repo.dart';
+import 'package:water_tank_clean_service/helper/preferenceutils.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
 
 
 class AuthProvider with ChangeNotifier {

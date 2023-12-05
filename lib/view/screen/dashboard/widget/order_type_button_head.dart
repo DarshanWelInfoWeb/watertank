@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:watertankclening/utill/styles.dart';
-
-import '../../../../utill/app_constants.dart';
-import '../../../../utill/color_resources.dart';
-import '../../../../utill/dimensions.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/color_resources.dart';
+import 'package:water_tank_clean_service/utill/dimensions.dart';
+import 'package:water_tank_clean_service/utill/styles.dart';
 
 class OrderTypeButtonHead extends StatelessWidget {
   final String text;

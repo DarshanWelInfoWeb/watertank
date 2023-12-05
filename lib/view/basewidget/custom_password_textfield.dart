@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:watertankclening/utill/app_constants.dart';
-import 'package:watertankclening/utill/color_resources.dart';
-import 'package:watertankclening/utill/images.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/color_resources.dart';
+import 'package:water_tank_clean_service/utill/images.dart';
 
 import '../../../utill/styles.dart';
 
@@ -40,7 +40,7 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
         borderRadius:BorderRadius.circular(10),
       ),
       child: TextFormField(
-        cursorColor: Theme.of(context).primaryColor,
+        cursorColor: ColorResources.LINE_BG,
         controller: widget.controller,
         obscureText: _obscureText,
         focusNode: widget.focusNode,
@@ -104,7 +104,7 @@ class _CustomDateTextFieldState extends State<CustomDateTextField> {
         borderRadius:BorderRadius.circular(10),
       ),
       child: TextFormField(
-        cursorColor: Theme.of(context).primaryColor,
+        cursorColor: ColorResources.LINE_BG,
         controller: widget.controller,
         focusNode: widget.focusNode,
         keyboardType: widget.textInputType ?? TextInputType.text,

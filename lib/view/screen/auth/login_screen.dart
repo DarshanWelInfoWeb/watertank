@@ -1,18 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:watertankclening/data/model/body/login_body.dart';
-import 'package:watertankclening/helper/preferenceutils.dart';
-import 'package:watertankclening/provider/auth_provider.dart';
-import 'package:watertankclening/utill/app_constants.dart';
-import 'package:watertankclening/utill/color_resources.dart';
-import 'package:watertankclening/utill/dimensions.dart';
-import 'package:watertankclening/utill/styles.dart';
-import 'package:watertankclening/view/basewidget/bezierContainer.dart';
-import 'package:watertankclening/view/basewidget/custom_password_textfield.dart';
-import 'package:watertankclening/view/basewidget/custom_textfield.dart';
-import 'package:watertankclening/view/screen/auth/forgot_password.dart';
-import 'package:watertankclening/view/screen/auth/social_login_widget.dart';
-import 'package:watertankclening/view/screen/dashboard/dashboard_screen.dart';
+import 'package:water_tank_clean_service/data/model/body/login_body.dart';
+import 'package:water_tank_clean_service/helper/preferenceutils.dart';
+import 'package:water_tank_clean_service/provider/auth_provider.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/color_resources.dart';
+import 'package:water_tank_clean_service/utill/dimensions.dart';
+import 'package:water_tank_clean_service/utill/styles.dart';
+import 'package:water_tank_clean_service/view/basewidget/bezierContainer.dart';
+import 'package:water_tank_clean_service/view/basewidget/custom_password_textfield.dart';
+import 'package:water_tank_clean_service/view/basewidget/custom_textfield.dart';
+import 'package:water_tank_clean_service/view/screen/auth/forgot_password.dart';
+import 'package:water_tank_clean_service/view/screen/auth/social_login_widget.dart';
+import 'package:water_tank_clean_service/view/screen/dashboard/dashboard_screen.dart';
 
 import '../../basewidget/custom_button.dart';
 
@@ -56,13 +59,13 @@ class _LoginState extends State<Login> {
 
   Widget _divider() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
-          Expanded(
+          const Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 01),
               child: Divider(
@@ -71,10 +74,10 @@ class _LoginState extends State<Login> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 2),
             child: Text('Or',style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_15),),
           ),
-          Expanded(
+          const Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 01),
               child: Divider(
@@ -82,7 +85,7 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
         ],
@@ -123,6 +126,15 @@ class _LoginState extends State<Login> {
       print("object:::2:::");
       AppConstants.getToast("This Email Id is not Found");
     }
+  }
+
+  Timer? _timer;
+  late double _progress;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -201,7 +213,14 @@ class _LoginState extends State<Login> {
                         )
                             :
                         CustomButtonFuction(
-                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Dashboard(),)),
+                            onTap: () async {
+                              await EasyLoading.show(
+                                status: 'loading...',
+                                maskType: EasyLoadingMaskType.black,
+                              );
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => Dashboard(),));
+                            },
                             buttonText: "Login"),
                         _divider(),
                         Social_Login_Screen(),

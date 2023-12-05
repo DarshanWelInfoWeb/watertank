@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vaidik_basket/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
 
 class AppLocalization {
   AppLocalization(this.locale);
@@ -33,16 +33,16 @@ class _DemoLocalizationsDelegate extends LocalizationsDelegate<AppLocalization> 
 
   @override
   bool isSupported(Locale locale) {
-    List<String> _languageString = [];
-    AppConstants.languages.forEach((language) {
-      _languageString.add(language.languageCode!);
-    });
-    return _languageString.contains(locale.languageCode);
+    List<String> languageString = [];
+    for (var language in AppConstants.languages) {
+      languageString.add(language.languageCode!);
+    }
+    return languageString.contains(locale.languageCode);
   }
 
   @override
   Future<AppLocalization> load(Locale locale) async {
-    AppLocalization localization = new AppLocalization(locale);
+    AppLocalization localization = AppLocalization(locale);
     await localization.load();
     return localization;
   }

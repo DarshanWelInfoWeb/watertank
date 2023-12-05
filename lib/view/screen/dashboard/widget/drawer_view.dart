@@ -3,16 +3,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:watertankclening/helper/preferenceutils.dart';
-import 'package:watertankclening/utill/app_constants.dart';
-import 'package:watertankclening/utill/color_resources.dart';
-import 'package:watertankclening/utill/images.dart';
-import 'package:watertankclening/utill/styles.dart';
-import 'package:watertankclening/view/basewidget/confirm_dialog_view.dart';
-import 'package:watertankclening/view/screen/auth/login_screen.dart';
-import 'package:watertankclening/view/screen/dashboard/dashboard_screen.dart';
-import 'package:watertankclening/view/screen/dashboard/widget/change_password.dart';
-import 'package:watertankclening/view/screen/dashboard/widget/profile.dart';
+import 'package:water_tank_clean_service/helper/preferenceutils.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/color_resources.dart';
+import 'package:water_tank_clean_service/utill/images.dart';
+import 'package:water_tank_clean_service/utill/styles.dart';
+import 'package:water_tank_clean_service/view/basewidget/confirm_dialog_view.dart';
+import 'package:water_tank_clean_service/view/screen/auth/login_screen.dart';
+import 'package:water_tank_clean_service/view/screen/dashboard/dashboard_screen.dart';
+import 'package:water_tank_clean_service/view/screen/dashboard/widget/change_password.dart';
+import 'package:water_tank_clean_service/view/screen/dashboard/widget/profile.dart';
+import 'package:water_tank_clean_service/view/screen/expense/expense_list.dart';
+import 'package:water_tank_clean_service/view/screen/inquiry/inquiry_list.dart';
+import 'package:water_tank_clean_service/view/screen/quotation/quotation_list.dart';
+import 'package:water_tank_clean_service/view/screen/setting/setting.dart';
 
 class Drawer_View extends StatefulWidget {
   const Drawer_View({Key? key}) : super(key: key);
@@ -107,82 +111,37 @@ class _Drawer_ViewState extends State<Drawer_View> {
                         height: AppConstants.itemHeight*0.07,
                         child: ListTile(
                           onTap:() {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DailyUpdate(),));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const InquiryList(),));
                           },
-                          leading: const Image(image: AssetImage(Images.update),color: ColorResources.LINE_BG,height: 30,width: 30),
-                          title: Text("Daily Update",style: montserratSemiBold.copyWith(fontSize: 17),),),
+                          leading: Image.asset(Images.bookkeeping,height: 30,width: 30,color: ColorResources.LINE_BG),
+                          title: Text("Inquiry",style: montserratSemiBold.copyWith(fontSize: 17),),),
                       ),
                       SizedBox(
                         height: AppConstants.itemHeight*0.07,
                         child: ListTile(
                           onTap:() {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CustomerList(),));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const QuotationList(),));
                           },
-                          leading: const Image(image: AssetImage(Images.team),color: ColorResources.LINE_BG,height: 30,width: 30),
-                          title: Text("Manage Customer",style: montserratSemiBold.copyWith(fontSize: 17),),),
+                          leading: Image.asset(Images.bill,height: 30,width: 30,color: ColorResources.LINE_BG),
+                          title: Text("Quotation",style: montserratSemiBold.copyWith(fontSize: 17),),),
                       ),
                       SizedBox(
                         height: AppConstants.itemHeight*0.07,
                         child: ListTile(
                           onTap:() {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchCustomer(),));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ExpenseList(),));
                           },
-                          leading: const Icon(Icons.search,color: ColorResources.LINE_BG,size: 30,),
-                          title: Text("Search Customer",style: montserratSemiBold.copyWith(fontSize: 17),),),
-                      ),
-                      SizedBox(
-                        height: AppConstants.itemHeight*0.07,
-                        child: ListTile(
-                          onTap:() {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const InvoiceList(),));
-                          },
-                          leading: const Image(image: AssetImage(Images.bookkeeping),color: ColorResources.LINE_BG,height: 30,width: 30),
-                          title: Text("Manage Invoice",style: montserratSemiBold.copyWith(fontSize: 17),),),
-                      ),
-                      SizedBox(
-                        height: AppConstants.itemHeight*0.07,
-                        child: ListTile(
-                          onTap:() {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PaymentList(),));
-                          },
-                          leading: const Image(image: AssetImage(Images.payment),color: ColorResources.LINE_BG,height: 30,width: 30),
-                          title: Text("Manage Temp Payment",style: montserratSemiBold.copyWith(fontSize: 17),),),
-                      ),
-                      SizedBox(
-                        height: AppConstants.itemHeight*0.07,
-                        child: ListTile(
-                          onTap:() {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RouteList(""),));
-                          },
-                          leading: const Image(image: AssetImage(Images.route),color: ColorResources.LINE_BG,height: 30,width: 30),
-                          title: Text("Route Master",style: montserratSemiBold.copyWith(fontSize: 17),),),
-                      ),
-                      SizedBox(
-                        height: AppConstants.itemHeight*0.07,
-                        child: ListTile(
-                          onTap:() {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => TempInvoiceList(""),));
-                          },
-                          leading: const Image(image: AssetImage(Images.bookkeeping),color: ColorResources.LINE_BG,height: 30,width: 30),
-                          title: Text("Temp Invoice",style: montserratSemiBold.copyWith(fontSize: 17),),),
-                      ),
-                      SizedBox(
-                        height: AppConstants.itemHeight*0.07,
-                        child: ListTile(
-                          onTap:() {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => Expense_List(),));
-                          },
-                          leading: const Image(image: AssetImage(Images.expense),color: ColorResources.LINE_BG,height: 30,width: 30),
+                          leading: Image.asset(Images.expense,height: 30,width: 30,color: ColorResources.LINE_BG),
                           title: Text("Expense",style: montserratSemiBold.copyWith(fontSize: 17),),),
                       ),
                       SizedBox(
                         height: AppConstants.itemHeight*0.07,
                         child: ListTile(
                           onTap:() {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (context) => ItemList(),));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Setting(),));
                           },
-                          leading: const Image(image: AssetImage(Images.item),color: ColorResources.LINE_BG,height: 30,width: 30),
-                          title: Text("Manage Item",style: montserratSemiBold.copyWith(fontSize: 17),),),
+                          leading: const Icon(Icons.settings,color: ColorResources.LINE_BG,size: 30,),
+                          title: Text("Setting",style: montserratSemiBold.copyWith(fontSize: 17),),),
                       ),
                       SizedBox(
                         height: AppConstants.itemHeight*0.07,

@@ -3,6 +3,7 @@ class Images {
   static const String no_data = 'assets/images/no_data.png';
   static const String logo = 'assets/images/logo.png';
   static const String logout = 'assets/images/logout.png';
+  static const String language = 'assets/images/language.png';
   static const String facebook = 'assets/images/facebook.png';
   static const String gmail = 'assets/images/gmail.png';
   static const String dashboard = 'assets/images/dashboard.png';

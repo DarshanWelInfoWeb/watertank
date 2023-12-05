@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:watertankclening/utill/app_constants.dart';
-import 'package:watertankclening/utill/color_resources.dart';
-import 'package:watertankclening/utill/dimensions.dart';
-import 'package:watertankclening/utill/images.dart';
-import 'package:watertankclening/utill/styles.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:water_tank_clean_service/localization/language_constrants.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/color_resources.dart';
+import 'package:water_tank_clean_service/utill/dimensions.dart';
+import 'package:water_tank_clean_service/utill/images.dart';
+import 'package:water_tank_clean_service/utill/styles.dart';
 
 import 'widget/drawer_view.dart';
 import 'widget/order_type_button_head.dart';
@@ -24,6 +26,7 @@ class _DashboardState extends State<Dashboard> {
     void initState() {
       // TODO: implement initState
       super.initState();
+      EasyLoading.dismiss();
     }
 
   @override
@@ -42,21 +45,22 @@ class _DashboardState extends State<Dashboard> {
             },
             icon: const Icon(Icons.menu, color: ColorResources.WHITE),
           ),
-          title: Text("Dashboard",style: montserratSemiBold.copyWith(color: ColorResources.WHITE,fontSize: Dimensions.FONT_SIZE_20),),
+          title: Text("${getTranslated("DASHBOARD", context)}",style: montserratSemiBold.copyWith(color: ColorResources.WHITE,fontSize: Dimensions.FONT_SIZE_20),),
           actions: [
             PopupMenuButton(
               color: ColorResources.WHITE,
               elevation: 10,
+              iconColor: ColorResources.WHITE,
               shape: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               itemBuilder: (context) {
                 return [
-                  PopupMenuItem(child: Row(
+                  const PopupMenuItem(child: Row(
                     children: [
                       Icon(Icons.report,color: ColorResources.BLACK,),
                       Text('Report & Error'),
                     ],
                   )),
-                  PopupMenuItem(child: Row(
+                  const PopupMenuItem(child: Row(
                     children: [
                       Icon(Icons.error,color: ColorResources.BLACK,),
                       Text('Help'),

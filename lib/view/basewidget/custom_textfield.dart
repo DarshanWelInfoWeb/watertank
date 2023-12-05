@@ -58,6 +58,7 @@ class CustomTextField extends StatelessWidget {
         focusNode: focusNode,
         keyboardType: textInputType ?? TextInputType.text,
         initialValue: null,
+        cursorColor: ColorResources.LINE_BG,
         textInputAction: textInputAction ?? TextInputAction.next,
         onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(nextNode);
@@ -136,6 +137,7 @@ class CustomTextFields extends StatelessWidget {
         focusNode: focusNode,
         keyboardType: textInputType ?? TextInputType.text,
         initialValue: null,
+        cursorColor: ColorResources.LINE_BG,
         textInputAction: textInputAction ?? TextInputAction.next,
         onFieldSubmitted: (v) {
           onSubmitted;
@@ -215,6 +217,7 @@ class CustomTextField_GREY_Color extends StatelessWidget {
         keyboardType: textInputType ?? TextInputType.text,
         initialValue: null,
         textInputAction: textInputAction ?? TextInputAction.next,
+        cursorColor: ColorResources.LINE_BG,
         onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(nextNode);
         },
@@ -294,6 +297,7 @@ class CustomTextFieldEnabled extends StatelessWidget {
         focusNode: focusNode,
         keyboardType: textInputType ?? TextInputType.text,
         initialValue: null,
+        cursorColor: ColorResources.LINE_BG,
         textInputAction: textInputAction ?? TextInputAction.next,
         onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(nextNode);
@@ -371,6 +375,7 @@ class CustomTextField_Pincode extends StatelessWidget {
         focusNode: focusNode,
         keyboardType: TextInputType.number,
         initialValue: null,
+        cursorColor: ColorResources.LINE_BG,
         textInputAction: textInputAction ?? TextInputAction.next,
         onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(nextNode);
@@ -448,6 +453,7 @@ class CustomTextField_GREY_ColorEnabled extends StatelessWidget {
         focusNode: focusNode,
         keyboardType: textInputType ?? TextInputType.text,
         initialValue: null,
+        cursorColor: ColorResources.LINE_BG,
         textInputAction: textInputAction ?? TextInputAction.next,
         onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(nextNode);

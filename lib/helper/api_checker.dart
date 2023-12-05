@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:watertankclening/data/model/response/base/api_response.dart';
-import 'package:watertankclening/view/screen/auth/login_screen.dart';
+import 'package:water_tank_clean_service/data/model/response/base/api_response.dart';
+import 'package:water_tank_clean_service/view/screen/auth/login_screen.dart';
 
 class ApiChecker {
   static void checkApi(BuildContext context, ApiResponse apiResponse) {

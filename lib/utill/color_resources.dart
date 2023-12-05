@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:watertankclening/provider/theme_provider.dart';
+import 'package:water_tank_clean_service/provider/theme_provider.dart';
 
 
 class ColorResources {
@@ -32,9 +32,9 @@ class ColorResources {
   static const Color SERVICES_SELECT_BG = Color(0xffC5C5CC);
   static const Color RED = Color(0xFFFC3A32);
   static const Color LIGHT_GREEN = Color(0xFF7CCACA);
-  static const Color gradient_top = Color(0xFF031A68);
-  static const Color gradient_bottom = Color(0xFF031A68);
-  static const Color LINE_BG = Color(0xFF162466);
+  static const Color gradient_top = Color(0xFF0099DA);
+  static const Color gradient_bottom = Color(0xFF0099DA);
+  static const Color LINE_BG = Color(0xFF0099DA);
   static const Color TEXT_COLOR = Color(0xffD9D9D9);
   static const Color GREEN = Colors.green;
   static const Color transparant=Color(0xff00ECECEC);

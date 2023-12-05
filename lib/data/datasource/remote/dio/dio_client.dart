@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:watertankclening/helper/preferenceutils.dart';
-import 'package:watertankclening/utill/app_constants.dart';
+import 'package:water_tank_clean_service/helper/preferenceutils.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
 
 import 'logging_interceptor.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:watertankclening/utill/color_resources.dart';
+import 'package:water_tank_clean_service/utill/color_resources.dart';
 
 ThemeData light = ThemeData(
   fontFamily: 'Montserrat',

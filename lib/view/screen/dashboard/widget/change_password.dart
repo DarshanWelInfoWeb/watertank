@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:watertankclening/utill/app_constants.dart';
-import 'package:watertankclening/utill/color_resources.dart';
-import 'package:watertankclening/utill/dimensions.dart';
-import 'package:watertankclening/utill/styles.dart';
-import 'package:watertankclening/view/basewidget/bezierContainer.dart';
-import 'package:watertankclening/view/basewidget/custom_button.dart';
-import 'package:watertankclening/view/basewidget/custom_password_textfield.dart';
-import 'package:watertankclening/view/screen/dashboard/dashboard_screen.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/color_resources.dart';
+import 'package:water_tank_clean_service/utill/dimensions.dart';
+import 'package:water_tank_clean_service/utill/styles.dart';
+import 'package:water_tank_clean_service/view/basewidget/bezierContainer.dart';
+import 'package:water_tank_clean_service/view/basewidget/custom_button.dart';
+import 'package:water_tank_clean_service/view/basewidget/custom_password_textfield.dart';
+import 'package:water_tank_clean_service/view/screen/dashboard/dashboard_screen.dart';
 
 
 class ChangePassword extends StatefulWidget {

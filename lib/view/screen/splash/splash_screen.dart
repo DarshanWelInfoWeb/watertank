@@ -4,15 +4,16 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:watertankclening/helper/preferenceutils.dart';
-import 'package:watertankclening/provider/splash_provider.dart';
-import 'package:watertankclening/utill/app_constants.dart';
-import 'package:watertankclening/utill/color_resources.dart';
-import 'package:watertankclening/utill/images.dart';
-import 'package:watertankclening/utill/styles.dart';
-import 'package:watertankclening/view/basewidget/no_internet_screen.dart';
-import 'package:watertankclening/view/screen/auth/login_screen.dart';
-import 'package:watertankclening/view/screen/dashboard/dashboard_screen.dart';
+import 'package:water_tank_clean_service/helper/database.dart';
+import 'package:water_tank_clean_service/helper/preferenceutils.dart';
+import 'package:water_tank_clean_service/provider/splash_provider.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/color_resources.dart';
+import 'package:water_tank_clean_service/utill/images.dart';
+import 'package:water_tank_clean_service/utill/styles.dart';
+import 'package:water_tank_clean_service/view/basewidget/no_internet_screen.dart';
+import 'package:water_tank_clean_service/view/screen/auth/login_screen.dart';
+import 'package:water_tank_clean_service/view/screen/dashboard/dashboard_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -24,12 +25,13 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   late StreamSubscription<ConnectivityResult> _onConnectivityChanged;
   bool? isNotConnected=true;
-
+  QuotationDb quotationDb = QuotationDb();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    quotationDb.deleteAll();
     AppConstants.closeKeyboard();
     _onConnectivityChanged = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       bool isNotConnected = result != ConnectivityResult.wifi && result != ConnectivityResult.mobile;

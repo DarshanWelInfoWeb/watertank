@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
-import 'package:watertankclening/provider/otp_provider.dart';
-import 'package:watertankclening/utill/app_constants.dart';
-import 'package:watertankclening/utill/color_resources.dart';
-import 'package:watertankclening/utill/dimensions.dart';
-import 'package:watertankclening/utill/styles.dart';
-import 'package:watertankclening/view/basewidget/bezierContainer.dart';
-import 'package:watertankclening/view/basewidget/custom_button.dart';
-import 'package:watertankclening/view/screen/auth/new_password.dart';
+import 'package:water_tank_clean_service/provider/otp_provider.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/color_resources.dart';
+import 'package:water_tank_clean_service/utill/dimensions.dart';
+import 'package:water_tank_clean_service/utill/styles.dart';
+import 'package:water_tank_clean_service/view/basewidget/bezierContainer.dart';
+import 'package:water_tank_clean_service/view/basewidget/custom_button.dart';
+import 'package:water_tank_clean_service/view/screen/auth/new_password.dart';
 
 class OTP_Screen extends StatefulWidget {
 String? email;
@@ -181,6 +181,7 @@ class _OTP_ScreenState extends State<OTP_Screen> {
                       padding: EdgeInsets.only(top: AppConstants.itemHeight*0.10),
                       child: CustomButtonFuction(
                           onTap: (){
+                            Provider.of<OTPProvider>(context, listen: false).setStopTime();
                             Navigator.push(context, MaterialPageRoute(builder: (context) => NewPassword(),));
                           },
                           buttonText: "Continue"),

@@ -1,31 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vaidik_basket/localization/language_constrants.dart';
-import 'package:vaidik_basket/provider/brand_provider.dart';
-import 'package:vaidik_basket/provider/category_provider.dart';
-import 'package:vaidik_basket/provider/featured_deal_provider.dart';
-import 'package:vaidik_basket/provider/home_category_product_provider.dart';
-import 'package:vaidik_basket/provider/localization_provider.dart';
-import 'package:vaidik_basket/provider/product_provider.dart';
-import 'package:vaidik_basket/provider/splash_provider.dart';
-import 'package:vaidik_basket/provider/top_seller_provider.dart';
-import 'package:vaidik_basket/utill/app_constants.dart';
-import 'package:vaidik_basket/utill/color_resources.dart';
-import 'package:vaidik_basket/utill/custom_themes.dart';
-import 'package:vaidik_basket/utill/dimensions.dart';
 import 'package:provider/provider.dart';
+import 'package:water_tank_clean_service/localization/language_constrants.dart';
+import 'package:water_tank_clean_service/provider/localization_provider.dart';
+import 'package:water_tank_clean_service/provider/splash_provider.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
+import 'package:water_tank_clean_service/utill/color_resources.dart';
+import 'package:water_tank_clean_service/utill/dimensions.dart';
+import 'package:water_tank_clean_service/utill/styles.dart';
 
-class CurrencyDialog extends StatelessWidget {
-  final bool isCurrency;
-  CurrencyDialog({this.isCurrency = true});
+class LanguageDialog extends StatelessWidget {
+  const LanguageDialog({super.key});
+
   @override
   Widget build(BuildContext context) {
     int index;
-    if(isCurrency) {
-      index = Provider.of<SplashProvider>(context, listen: false).currencyIndex!;
-    }else {
-      index = Provider.of<LocalizationProvider>(context, listen: false).languageIndex!;
-    }
+
+    index = Provider.of<LocalizationProvider>(context, listen: false).languageIndex!;
 
     return Dialog(
       backgroundColor: Theme.of(context).highlightColor,
@@ -35,16 +26,14 @@ class CurrencyDialog extends StatelessWidget {
 
         Padding(
           padding: EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
-          child: Text(isCurrency ? getTranslated('currency', context)! : getTranslated('language', context)!, style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
+          child: Text("Select Language", style: montserratSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_17)),
         ),
 
         SizedBox(height: 150, child: Consumer<SplashProvider>(
           builder: (context, splash, child) {
-            List<String> _valueList = [];
-            if(isCurrency) {
-              splash.configModel!.currencyList!.forEach((currency) => _valueList.add(currency.name!));
-            }else {
-              AppConstants.languages.forEach((language) => _valueList.add(language.languageName!));
+            List<String> valueList = [];
+            for (var language in AppConstants.languages) {
+              valueList.add(language.languageName!);
             }
             return CupertinoPicker(
               itemExtent: 40,
@@ -54,7 +43,7 @@ class CurrencyDialog extends StatelessWidget {
               onSelectedItemChanged: (int i) {
                 index = i;
               },
-              children: _valueList.map((value) {
+              children: valueList.map((value) {
                 return Center(child: Text(value, style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color)));
               }).toList(),
             );
@@ -65,7 +54,7 @@ class CurrencyDialog extends StatelessWidget {
         Row(children: [
           Expanded(child: TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(getTranslated('CANCEL', context)!, style: robotoRegular.copyWith(color: ColorResources.getYellow(context))),
+            child: Text("Cancel", style: montserratRegular.copyWith(color: ColorResources.getYellow(context))),
           )),
           Container(
             height: 50,
@@ -74,26 +63,13 @@ class CurrencyDialog extends StatelessWidget {
           ),
           Expanded(child: TextButton(
             onPressed: () {
-              if(isCurrency) {
-                Provider.of<SplashProvider>(context, listen: false).setCurrency(index);
-              }else {
                 Provider.of<LocalizationProvider>(context, listen: false).setLanguage(Locale(
                   AppConstants.languages[index].languageCode!,
                   AppConstants.languages[index].countryCode,
                 ));
-                Provider.of<CategoryProvider>(context, listen: false).getCategoryList(false, context);
-                Provider.of<HomeCategoryProductProvider>(context, listen: false).getHomeCategoryProductList(false, context);
-                Provider.of<TopSellerProvider>(context, listen: false).getTopSellerList(false, context);
-                Provider.of<BrandProvider>(context, listen: false).getBrandList(false, context);
-                Provider.of<ProductProvider>(context, listen: false).getLatestProductList(1, context, reload: true);
-                Provider.of<ProductProvider>(context, listen: false).getFeaturedProductList('1', context, reload: true);
-                Provider.of<FeaturedDealProvider>(context, listen: false).getFeaturedDealList(false, context);
-                Provider.of<ProductProvider>(context, listen: false).getLProductList('1', context, reload: true);
-                Provider.of<ProductProvider>(context, listen: false).getTopProductList('1', context, reload: true);
-              }
               Navigator.pop(context);
             },
-            child: Text(getTranslated('ok', context)!, style: robotoRegular.copyWith(color: ColorResources.getGreen(context))),
+            child: Text("Ok", style: montserratRegular.copyWith(color: ColorResources.GREEN)),
           )),
         ]),
 

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:watertankclening/data/repository/splash_repo.dart';
+import 'package:water_tank_clean_service/data/repository/splash_repo.dart';
 
 class SplashProvider extends ChangeNotifier {
   final SplashRepo splashRepo;

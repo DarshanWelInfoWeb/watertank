@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:watertankclening/data/datasource/remote/dio/dio_client.dart';
-import 'package:watertankclening/data/datasource/remote/exception/api_error_handler.dart';
-import 'package:watertankclening/data/model/body/login_body.dart';
-import 'package:watertankclening/data/model/response/base/api_response.dart';
-import 'package:watertankclening/helper/preferenceutils.dart';
-import 'package:watertankclening/utill/app_constants.dart';
+import 'package:water_tank_clean_service/data/datasource/remote/dio/dio_client.dart';
+import 'package:water_tank_clean_service/data/datasource/remote/exception/api_error_handler.dart';
+import 'package:water_tank_clean_service/data/model/body/login_body.dart';
+import 'package:water_tank_clean_service/data/model/response/base/api_response.dart';
+import 'package:water_tank_clean_service/helper/preferenceutils.dart';
+import 'package:water_tank_clean_service/utill/app_constants.dart';
 
 class AuthRepo {
   final DioClient? dioClient;
