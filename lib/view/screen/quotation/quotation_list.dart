@@ -68,132 +68,141 @@ class _QuotationListState extends State<QuotationList> {
             items.isNotEmpty
                 ?
             ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          physics: BouncingScrollPhysics(),
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            final item = items[index];
-            return Container(
-              margin: EdgeInsets.symmetric(vertical: AppConstants.itemHeight*0.003),
-              padding: EdgeInsets.symmetric(horizontal: AppConstants.itemWidth*0.01,vertical: AppConstants.itemHeight*0.01),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade50,
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    width: AppConstants.itemWidth*0.85,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("#${items[index].quotationNo}",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
-                            Container(
-                                alignment: Alignment.centerLeft,
-                                width: AppConstants.itemWidth*0.40,
-                                child: Text(items[index].name,style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),)),
-                            Text("\u20b9 ${items[index].amount}",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
-                          ],
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              physics: const BouncingScrollPhysics(),
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                final item = items[index];
+                return Container(
+                  margin: EdgeInsets.symmetric(vertical: AppConstants.itemHeight*0.003),
+                  padding: EdgeInsets.symmetric(horizontal: AppConstants.itemWidth*0.01,vertical: AppConstants.itemHeight*0.01),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade50,
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      border: Border(bottom: BorderSide(color: ColorResources.GREY.withOpacity(0.05))),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 1,
+                          spreadRadius: 1,
+                          color: ColorResources.GREY.withOpacity(0.01),
+                          offset: const Offset(0.5, 0.5)
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ]
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        width: AppConstants.itemWidth*0.85,
+                        child: Column(
                           children: [
-                            Text(items[index].date,style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => PdfPreviewPageMain(),));
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: AppConstants.itemHeight*0.03,
-                                padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-                                decoration: BoxDecoration(
-                                  color: ColorResources.LINE_BG,
-                                  borderRadius: BorderRadius.circular(05),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("#${items[index].quotationNo}",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
+                                Container(
+                                    alignment: Alignment.centerLeft,
+                                    width: AppConstants.itemWidth*0.40,
+                                    child: Text(items[index].name,style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),)),
+                                Text("\u20b9 ${items[index].amount}",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(items[index].date,style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PdfPreviewPageMain(),));
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: AppConstants.itemHeight*0.03,
+                                    padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
+                                    decoration: BoxDecoration(
+                                      color: ColorResources.LINE_BG,
+                                      borderRadius: BorderRadius.circular(05),
+                                    ),
+                                    child: Text('View',style: montserratSemiBold.copyWith(color: ColorResources.WHITE,fontSize: Dimensions.FONT_SIZE_15),maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,),
+                                  ),
                                 ),
-                                child: Text('View',style: montserratSemiBold.copyWith(color: ColorResources.WHITE,fontSize: Dimensions.FONT_SIZE_15),maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,),
-                              ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                  PopupMenuButton(
-                    color: ColorResources.WHITE,
-                    surfaceTintColor: ColorResources.WHITE,
-                    elevation: 10,
-                    shape: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                    onSelected: (value) {
-                      if(value == 0){
+                      ),
+                      PopupMenuButton(
+                        color: ColorResources.WHITE,
+                        surfaceTintColor: ColorResources.WHITE,
+                        elevation: 10,
+                        shape: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                        onSelected: (value) {
+                          if(value == 0){
 
-                      }else{
-                        showDialog<bool>(
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content: const Text("Are You Sure You Want to Delete ?"),
-                                contentTextStyle: montserratRegular.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_16),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        items.remove(item);
-                                        Navigator.of(context).pop();
-                                      });
-                                      // Provider.of<InvoiceProvider>(context, listen: false).getDeleteMainInvoice(context,"${invoice.mainInvoiceList[index].intid}").then((value) {
-                                      //   AppConstants.getToast("Deleted Successfully");
-                                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => InvoiceList("","",customerDropDown.toString(),"Invoice")));
-                                      // });
-                                    },
-                                    style: const ButtonStyle(
-                                        backgroundColor: MaterialStatePropertyAll(ColorResources.LINE_BG),
-                                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(05))))
-                                    ),
-                                    child: Text('Yes',style: montserratRegular.copyWith(color: ColorResources.WHITE)),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    style: const ButtonStyle(
-                                        backgroundColor: MaterialStatePropertyAll(ColorResources.LINE_BG),
-                                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(05))))
-                                    ),
-                                    child: Text('No',style: montserratRegular.copyWith(color: ColorResources.WHITE)),
-                                  ),
-                                ],
-                              );
-                            },context: context);
-                      }
-                    },
-                    itemBuilder: (context) {
-                      return [
-                        PopupMenuItem(value: 0,child: Row(
-                          children: [
-                            const Icon(Icons.edit,color: ColorResources.BLACK,),
-                            Text('Edit',style: montserratRegular.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_15)),
-                          ],
-                        )),
-                        PopupMenuItem(value: 1,child: Row(
-                          children: [
-                            const Icon(Icons.delete,color: ColorResources.BLACK),
-                            Text('Delete',style: montserratRegular.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_15)),
-                          ],
-                        )),
-                      ];
-                    },
-                    child: const Icon(Icons.more_vert,color: ColorResources.BLACK,),
+                          }else{
+                            showDialog<bool>(
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: const Text("Are You Sure You Want to Delete ?"),
+                                    contentTextStyle: montserratRegular.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_16),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            items.remove(item);
+                                            Navigator.of(context).pop();
+                                          });
+                                          // Provider.of<InvoiceProvider>(context, listen: false).getDeleteMainInvoice(context,"${invoice.mainInvoiceList[index].intid}").then((value) {
+                                          //   AppConstants.getToast("Deleted Successfully");
+                                          //   Navigator.push(context, MaterialPageRoute(builder: (context) => InvoiceList("","",customerDropDown.toString(),"Invoice")));
+                                          // });
+                                        },
+                                        style: const ButtonStyle(
+                                            backgroundColor: MaterialStatePropertyAll(ColorResources.LINE_BG),
+                                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(05))))
+                                        ),
+                                        child: Text('Yes',style: montserratRegular.copyWith(color: ColorResources.WHITE)),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        style: const ButtonStyle(
+                                            backgroundColor: MaterialStatePropertyAll(ColorResources.LINE_BG),
+                                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(05))))
+                                        ),
+                                        child: Text('No',style: montserratRegular.copyWith(color: ColorResources.WHITE)),
+                                      ),
+                                    ],
+                                  );
+                                },context: context);
+                          }
+                        },
+                        itemBuilder: (context) {
+                          return [
+                            PopupMenuItem(value: 0,child: Row(
+                              children: [
+                                const Icon(Icons.edit,color: ColorResources.BLACK,),
+                                Text('Edit',style: montserratRegular.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_15)),
+                              ],
+                            )),
+                            PopupMenuItem(value: 1,child: Row(
+                              children: [
+                                const Icon(Icons.delete,color: ColorResources.BLACK),
+                                Text('Delete',style: montserratRegular.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_15)),
+                              ],
+                            )),
+                          ];
+                        },
+                        child: const Icon(Icons.more_vert,color: ColorResources.BLACK,),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-        },)
+                );
+            },)
                 :
             DataNotFoundScreen("No Data Found"),
       ),
