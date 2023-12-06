@@ -222,8 +222,6 @@ class _LoginState extends State<Login> {
                                 builder: (context) => Dashboard(),));
                             },
                             buttonText: "Login"),
-                        _divider(),
-                        Social_Login_Screen(),
                       ],
                     ),
                   ),

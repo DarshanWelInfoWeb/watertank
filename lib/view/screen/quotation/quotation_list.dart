@@ -1,9 +1,11 @@
 import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:water_tank_clean_service/utill/app_constants.dart';
 import 'package:water_tank_clean_service/utill/color_resources.dart';
 import 'package:water_tank_clean_service/utill/dimensions.dart';
 import 'package:water_tank_clean_service/utill/styles.dart';
+import 'package:water_tank_clean_service/view/basewidget/no_internet_screen.dart';
 import 'package:water_tank_clean_service/view/screen/quotation/add-quotation.dart';
 import 'package:water_tank_clean_service/view/screen/quotation/pdf_view/pdfpreview.dart';
 
@@ -15,6 +17,12 @@ class QuotationList extends StatefulWidget {
 }
 
 class _QuotationListState extends State<QuotationList> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    EasyLoading.dismiss();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,12 +64,16 @@ class _QuotationListState extends State<QuotationList> {
                 spreadRadius: 1)
           ],
         ),
-        child: ListView.builder(
+        child:
+            items.isNotEmpty
+                ?
+            ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           physics: BouncingScrollPhysics(),
-          itemCount: 10,
+          itemCount: items.length,
           itemBuilder: (context, index) {
+            final item = items[index];
             return Container(
               margin: EdgeInsets.symmetric(vertical: AppConstants.itemHeight*0.003),
               padding: EdgeInsets.symmetric(horizontal: AppConstants.itemWidth*0.01,vertical: AppConstants.itemHeight*0.01),
@@ -79,18 +91,18 @@ class _QuotationListState extends State<QuotationList> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("#34920",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
+                            Text("#${items[index].quotationNo}",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
                             Container(
                                 alignment: Alignment.centerLeft,
                                 width: AppConstants.itemWidth*0.40,
-                                child: Text("Rajubhai",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),)),
-                            Text("\u20b9 5000",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
+                                child: Text(items[index].name,style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),)),
+                            Text("\u20b9 ${items[index].amount}",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("04/12/2023",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
+                            Text(items[index].date,style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
                             InkWell(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => PdfPreviewPageMain(),));
@@ -130,6 +142,10 @@ class _QuotationListState extends State<QuotationList> {
                                 actions: [
                                   TextButton(
                                     onPressed: () {
+                                      setState(() {
+                                        items.remove(item);
+                                        Navigator.of(context).pop();
+                                      });
                                       // Provider.of<InvoiceProvider>(context, listen: false).getDeleteMainInvoice(context,"${invoice.mainInvoiceList[index].intid}").then((value) {
                                       //   AppConstants.getToast("Deleted Successfully");
                                       //   Navigator.push(context, MaterialPageRoute(builder: (context) => InvoiceList("","",customerDropDown.toString(),"Invoice")));
@@ -177,8 +193,32 @@ class _QuotationListState extends State<QuotationList> {
                 ],
               ),
             );
-        },),
+        },)
+                :
+            DataNotFoundScreen("No Data Found"),
       ),
     );
   }
+
+  final List<Item> items = [
+    Item("23412","Rajubhai","5000","04/12/2023"),
+    Item("23413","Rajubhai","7500","04/12/2023"),
+    Item("23414","Rajubhai","5000","04/12/2023"),
+    Item("23415","Haribhai","8000","04/12/2023"),
+    Item("23416","Manojbhai","2000","04/12/2023"),
+    Item("23417","Rajubhai","4000","04/12/2023"),
+    Item("23418","Movlikbhai","5000","04/12/2023"),
+    Item("23419","Rajubhai","5000","04/12/2023"),
+    Item("23420","Vivekbhai","5500","04/12/2023"),
+    Item("23421","Govindbhai","10000","04/12/2023"),
+  ];
+}
+
+class Item {
+  String quotationNo;
+  String name;
+  String amount;
+  String date;
+
+  Item(this.quotationNo,this.name, this.amount,this.date);
 }

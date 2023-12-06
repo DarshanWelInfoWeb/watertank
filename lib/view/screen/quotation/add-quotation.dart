@@ -24,13 +24,15 @@ class _AddQuotationState extends State<AddQuotation> {
   TextEditingController mobileController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController tankSizeController = TextEditingController();
-  TextEditingController amountController = TextEditingController();
+  TextEditingController totalController = TextEditingController();
+  TextEditingController grandTotalController = TextEditingController();
   FocusNode dateCode = FocusNode();
   FocusNode nameCode = FocusNode();
   FocusNode mobileCode = FocusNode();
   FocusNode addressCode = FocusNode();
   FocusNode tankSizeCode = FocusNode();
-  FocusNode amountCode = FocusNode();
+  FocusNode totalCode = FocusNode();
+  FocusNode grandTotalCode = FocusNode();
 
   late String formattedDate = '';
   late String date_shcedule = '';
@@ -38,6 +40,7 @@ class _AddQuotationState extends State<AddQuotation> {
 
   String radioButtonItem = 'Concrete';
   int tankTypeId = -1;
+  int grandTotal = 0;
 
   var waterTypeList = [
     'Mineral Water',
@@ -63,6 +66,10 @@ class _AddQuotationState extends State<AddQuotation> {
         setState(() {
           quotationList.addAll(value);
           quotationList = value;
+          for(int i=0;i<quotationList.length;i++){
+            grandTotal += int.parse(quotationList[i].amount.toString());
+            grandTotalController.text = grandTotal.toString();
+          }
           print("object:1:¥::$quotationList");
         });
       });
@@ -271,6 +278,22 @@ class _AddQuotationState extends State<AddQuotation> {
                 ),
             ),
           ),
+          Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(horizontal: AppConstants.itemWidth*0.03),
+              child: Text("Amount",style: montserratBold.copyWith(color: ColorResources.BLACK),)),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppConstants.itemWidth*0.02,vertical: AppConstants.itemHeight*0.01),
+            child: CustomTextField(
+              controller: totalController,
+              focusNode: totalCode,
+              nextNode: null,
+              hintText: "Amount",
+              isPhoneNumber: true,
+              textInputType: TextInputType.phone,
+              textInputAction: TextInputAction.done,
+            ),
+          ),
           CustomButtonFuction(
             onTap: (){
               if(tankSizeController.text == ''){
@@ -286,14 +309,26 @@ class _AddQuotationState extends State<AddQuotation> {
                     tankType: tankTypeId,
                     tankTypename: radioButtonItem,
                     waterType: waterType,
+                    amount: int.parse(totalController.text)
                   );
+                  grandTotal += int.parse(totalController.text.toString());
                   EasyLoading.show();
                   quotationDb.insertModel(insertQuotationBody!).then((value) {
+                    quotationDb.getModelList().then((value) {
+                      quotationList.addAll(value);
+                      quotationList = value;
+                      for(int i=0;i<quotationList.length;i++){
+                        // grandTotal += int.parse(quotationList[i].amount.toString());
+                        grandTotalController.text = grandTotal.toString();
+                      }
+                    });
+                    print("add total :: $grandTotal");
                     EasyLoading.dismiss();
                   });
                   tankSizeController.clear();
                   tankTypeId = -1;
                   waterType = null;
+                  totalController.clear();
                 });
               }
             },
@@ -341,6 +376,13 @@ class _AddQuotationState extends State<AddQuotation> {
                               child: Text('Tank Type',
                                   style: montserratBold.copyWith(color: ColorResources.BLACK)),
                             )),
+                            DataColumn(label: _verticalDivider),
+                            DataColumn(label: Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(05),
+                              child: Text('Amount',
+                                  style: montserratBold.copyWith(color: ColorResources.BLACK)),
+                            )),
                           ],
                           rows: List.generate(quotationList.length, (index) {
                             InsertQuotationBody model = quotationList[index];
@@ -360,13 +402,11 @@ class _AddQuotationState extends State<AddQuotation> {
                                                   onPressed: () {
                                                     setState(() {
                                                       EasyLoading.show();
-                                                      quotationDb.deleteModel(quotationList[index]).then((value) => EasyLoading.dismiss());
-                                                      // dbManager.deleteModel(modelList[index]).then((value) {
-                                                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => AddRouteMaster(routeNameController.text,vehicleNumberController.text.toUpperCase(),dateController.text,int.parse(driverDropdwon.toString()),int.parse(helperDropdwon.toString()),"item"),));
-                                                      // });
-                                                      // itemsDropdownValue = "Select Item";
-                                                      // itemsDropdownName = "";
-                                                      // qtyController.text = "";
+                                                      quotationDb.deleteModel(quotationList[index]).then((value) {
+                                                        grandTotal = int.parse(grandTotalController.text) - int.parse(quotationList[index].amount.toString());
+                                                        grandTotalController.text = grandTotal.toString();
+                                                        EasyLoading.dismiss();
+                                                      });
                                                       Navigator.pop(context);
                                                     });
                                                   },
@@ -378,9 +418,6 @@ class _AddQuotationState extends State<AddQuotation> {
                                                 ),
                                                 TextButton(
                                                   onPressed: () {
-                                                    // itemsDropdownValue = "Select Item";
-                                                    // itemsDropdownName = "";
-                                                    // qtyController.text = "";
                                                     Navigator.pop(context);
                                                   },
                                                   style: const ButtonStyle(
@@ -430,6 +467,16 @@ class _AddQuotationState extends State<AddQuotation> {
                                             color: ColorResources.BLACK),
                                         textAlign: TextAlign.center,
                                       ))),
+                                  DataCell(Container(child: _verticalDivider)),
+                                  DataCell(Container(
+                                      alignment: Alignment.centerLeft,
+                                      padding: const EdgeInsets.all(05),
+                                      child: Text(
+                                        "\u20b9 ${model.amount}",
+                                        style: montserratBold.copyWith(
+                                            color: ColorResources.BLACK),
+                                        textAlign: TextAlign.center,
+                                      ))),
                                 ],
                             );
                           }),
@@ -449,14 +496,15 @@ class _AddQuotationState extends State<AddQuotation> {
           Container(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(horizontal: AppConstants.itemWidth*0.03),
-              child: Text("Amount",style: montserratBold.copyWith(color: ColorResources.BLACK),)),
+              child: Text("Grand Total",style: montserratBold.copyWith(color: ColorResources.BLACK),)),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppConstants.itemWidth*0.02,vertical: AppConstants.itemHeight*0.01),
-            child: CustomTextField(
-              controller: amountController,
-              focusNode: amountCode,
+            child: CustomTextFieldEnabled(
+              controller: grandTotalController,
+              focusNode: grandTotalCode,
               nextNode: null,
-              hintText: "Amount",
+              enabled: false,
+              hintText: "Grand Total",
               isPhoneNumber: true,
               textInputType: TextInputType.phone,
               textInputAction: TextInputAction.done,

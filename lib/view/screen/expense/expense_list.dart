@@ -4,6 +4,7 @@ import 'package:water_tank_clean_service/utill/app_constants.dart';
 import 'package:water_tank_clean_service/utill/color_resources.dart';
 import 'package:water_tank_clean_service/utill/dimensions.dart';
 import 'package:water_tank_clean_service/utill/styles.dart';
+import 'package:water_tank_clean_service/view/basewidget/no_internet_screen.dart';
 import 'package:water_tank_clean_service/view/screen/expense/add_expense.dart';
 
 class ExpenseList extends StatefulWidget {
@@ -55,12 +56,16 @@ class _ExpenseListState extends State<ExpenseList> {
                 spreadRadius: 1)
           ],
         ),
-        child: ListView.builder(
+        child:
+        items.isNotEmpty
+            ?
+        ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           physics: BouncingScrollPhysics(),
-          itemCount: 10,
+          itemCount: items.length,
           itemBuilder: (context, index) {
+            final item = items[index];
             return Container(
               margin: EdgeInsets.symmetric(vertical: AppConstants.itemHeight*0.003),
               decoration: BoxDecoration(
@@ -77,15 +82,15 @@ class _ExpenseListState extends State<ExpenseList> {
                         Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Tank Cleaning",
+                              items[index].name,
                               style: montserratSemiBold.copyWith(
                                   color: ColorResources.BLACK,
                                   fontSize: Dimensions.FONT_SIZE_14),
                             )),
-                        Text("04/12/2023",style: montserratSemiBold.copyWith(color: ColorResources.GREY,fontSize: Dimensions.FONT_SIZE_14),)
+                        Text(items[index].date,style: montserratSemiBold.copyWith(color: ColorResources.GREY,fontSize: Dimensions.FONT_SIZE_14),)
                       ],
                     ),
-                    Text("\u20b9 5000",style: montserratBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_15),),
+                    Text("\u20b9 ${items[index].amount}",style: montserratBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_15),),
                   ],
                 ),
                 trailing: PopupMenuButton(
@@ -106,6 +111,10 @@ class _ExpenseListState extends State<ExpenseList> {
                               actions: [
                                 TextButton(
                                   onPressed: () {
+                                    setState(() {
+                                      items.remove(item);
+                                      Navigator.of(context).pop();
+                                    });
                                     // Provider.of<ExpenseProvider>(context, listen: false).getDeleteExpense(context,expense.expenseList[index].intId.toString()).then((value) {
                                     //   AppConstants.getToast("Deleted Successfully");
                                     //   Navigator.push(context, MaterialPageRoute(builder: (context) => Expense_List("","","Expense"),));
@@ -153,8 +162,32 @@ class _ExpenseListState extends State<ExpenseList> {
               ),
             );
           },
-        ),
+        )
+            :
+        DataNotFoundScreen("No Data Found"),
       ),
     );
   }
+
+
+  final List<Item> items = [
+    Item("Tank Cleaning","04/12/2023","5000"),
+    Item("PVC Tank","04/12/2023","4500"),
+    Item("Concrete Tank","04/12/2023","9500"),
+    Item("300 Liter PVC Tank","04/12/2023","5000"),
+    Item("Tank Cleaning","04/12/2023","2000"),
+    Item("PVC Tank","04/12/2023","7500"),
+    Item("400 Liter Concrete Tank","04/12/2023","8000"),
+    Item("Concrete Tank","04/12/2023","7000"),
+    Item("PVC Tank","04/12/2023","3000"),
+    Item("Tank Cleaning","04/12/2023","6000"),
+  ];
+}
+
+class Item {
+  String name;
+  String date;
+  String amount;
+
+  Item(this.name, this.date,this.amount);
 }

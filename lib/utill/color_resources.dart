@@ -10,11 +10,11 @@ class ColorResources {
   }
 
   static Color getColombiaBlue(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF031A68) : Color(0xFF031A68);
+    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF0099DA) : Color(0xFF0099DA);
   }
 
   static Color getYellow(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF031A68) : Color(0xFF031A68);
+    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF0099DA) : Color(0xFF0099DA);
   }
 
   static Color getHomeBg(BuildContext context) {
