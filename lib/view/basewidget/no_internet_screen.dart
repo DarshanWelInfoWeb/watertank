@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water_tank_clean_service/localization/language_constrants.dart';
 
 import '../../utill/color_resources.dart';
 import '../../utill/dimensions.dart';
@@ -19,13 +20,13 @@ class NoInternetOrDataScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(isNoInternet ? Images.no_internet : Images.no_data, width: 150, height: 150),
-            Text(isNoInternet ? "Opps!" : "Sorry !", style: montserratBold.copyWith(
+            Text(isNoInternet ? "Opps!" : "${getTranslated('SORRY', context)}", style: montserratBold.copyWith(
               fontSize: 30,
               color: isNoInternet ? Theme.of(context).textTheme.bodyText1?.color : ColorResources.getColombiaBlue(context),
             )),
             SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
             Text(
-              isNoInternet ? "No Internet Connection" : 'No Data Found',
+              isNoInternet ? "${getTranslated('NO_INTERNET', context)}" : '${getTranslated('NO_DATA_FOUND', context)}',
               textAlign: TextAlign.center,
               style: montserratRegular,
             ),
@@ -42,7 +43,7 @@ class NoInternetOrDataScreen extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
-                  child: Text("Retry", style: montserratSemiBold.copyWith(color: Theme.of(context).highlightColor, fontSize: Dimensions.FONT_SIZE_16)),
+                  child: Text("${getTranslated('RETRY', context)}", style: montserratSemiBold.copyWith(color: Theme.of(context).highlightColor, fontSize: Dimensions.FONT_SIZE_16)),
                 ),
               ),
             ) : SizedBox.shrink(),
@@ -67,7 +68,7 @@ class DataNotFoundScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(Images.no_data, width: 150, height: 150),
-            Text("Sorry !", style: montserratBold.copyWith(
+            Text("${getTranslated('SORRY', context)}", style: montserratBold.copyWith(
               fontSize: 30,
               color: ColorResources.getColombiaBlue(context),
             )),
@@ -98,7 +99,7 @@ class BannerNotFoundScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 20),
-            Text("Sorry !", style: montserratBold.copyWith(
+            Text("${getTranslated('SORRY', context)}", style: montserratBold.copyWith(
               fontSize: 30,
               color: ColorResources.getColombiaBlue(context),
             )),

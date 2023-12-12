@@ -79,13 +79,13 @@ class _QuotationListState extends State<QuotationList> {
                   padding: EdgeInsets.symmetric(horizontal: AppConstants.itemWidth*0.01,vertical: AppConstants.itemHeight*0.01),
                   decoration: BoxDecoration(
                       color: Colors.grey.shade50,
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.only(topLeft:Radius.circular(10),bottomRight:Radius.circular(10)),
                       border: Border(bottom: BorderSide(color: ColorResources.GREY.withOpacity(0.05))),
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 1,
                           spreadRadius: 1,
-                          color: ColorResources.GREY.withOpacity(0.01),
+                          color: ColorResources.GREY.withOpacity(0.10),
                           offset: const Offset(0.5, 0.5)
                         ),
                       ]
@@ -100,11 +100,11 @@ class _QuotationListState extends State<QuotationList> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("#${items[index].quotationNo}",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
+                                Text("#${items[index].quotationNo}",style: montserratBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
                                 Container(
                                     alignment: Alignment.centerLeft,
-                                    width: AppConstants.itemWidth*0.40,
-                                    child: Text(items[index].name,style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),)),
+                                    width: AppConstants.itemWidth*0.50,
+                                    child: Text(items[index].name,style: montserratBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_15),)),
                                 Text("\u20b9 ${items[index].amount}",style: montserratSemiBold.copyWith(color: ColorResources.BLACK,fontSize: Dimensions.FONT_SIZE_14),),
                               ],
                             ),
@@ -120,9 +120,9 @@ class _QuotationListState extends State<QuotationList> {
                                     alignment: Alignment.center,
                                     height: AppConstants.itemHeight*0.03,
                                     padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: ColorResources.LINE_BG,
-                                      borderRadius: BorderRadius.circular(05),
+                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(05),bottomRight: Radius.circular(05)),
                                     ),
                                     child: Text('View',style: montserratSemiBold.copyWith(color: ColorResources.WHITE,fontSize: Dimensions.FONT_SIZE_15),maxLines: 1,
                                       overflow: TextOverflow.ellipsis,),

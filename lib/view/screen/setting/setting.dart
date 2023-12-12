@@ -30,7 +30,7 @@ class _SettingState extends State<Setting> {
           },
           icon: const Icon(Icons.arrow_back, color: ColorResources.WHITE),
         ),
-        title: Text("Setting",style: montserratSemiBold.copyWith(color: ColorResources.WHITE,fontSize: Dimensions.FONT_SIZE_20),),
+        title: Text("${getTranslated('SETTING', context)}",style: montserratSemiBold.copyWith(color: ColorResources.WHITE,fontSize: Dimensions.FONT_SIZE_20),),
       ),
       body: Container(
         padding: const EdgeInsets.all(12),
@@ -42,7 +42,7 @@ class _SettingState extends State<Setting> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "Common",
+                  "${getTranslated('COMMON', context)}",
                   style: montserratSemiBold.copyWith(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -51,15 +51,12 @@ class _SettingState extends State<Setting> {
                 ),
               ],
             ),
-            // TitleButton(
-            //   image: Images.language,
-            //   title: "Language",
-            //   navigateTo: ,
-            //   // navigateTo: () => showAnimatedDialog(context, LanguageDialog()),
-            // ),
+            Divider(
+              color: ColorResources.GREY.withOpacity(0.20),
+            ),
             ListTile(
               leading: Icon(Icons.language),
-              title: Text("Language"),
+              title: Text("${getTranslated('LANGUAGE', context)}"),
               subtitle: Text("English"),
               onTap: () {
                 showAnimatedDialog(context, LanguageDialog());

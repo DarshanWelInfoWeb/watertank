@@ -66,6 +66,7 @@ class AppConstants {
 
   static List<LanguageModel> languages = [
     LanguageModel(imageUrl: '', languageName: 'English', countryCode: 'US', languageCode: 'en'),
+    LanguageModel(imageUrl: '', languageName: 'Gujarati', countryCode: 'IN', languageCode: 'gu'),
   ];
 
 

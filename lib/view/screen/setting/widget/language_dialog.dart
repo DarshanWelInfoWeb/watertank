@@ -20,13 +20,12 @@ class LanguageDialog extends StatelessWidget {
 
     return Dialog(
       backgroundColor: Theme.of(context).highlightColor,
-      shape: RoundedRectangleBorder(// borderRadius: BorderRadius.circular(10.0)
-          borderRadius: BorderRadius.circular(0.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
 
         Padding(
-          padding: EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
-          child: Text("Select Language", style: montserratSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_17)),
+          padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
+          child: Text("${getTranslated('choose_language', context)}", style: montserratSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_17)),
         ),
 
         SizedBox(height: 150, child: Consumer<SplashProvider>(
@@ -50,15 +49,15 @@ class LanguageDialog extends StatelessWidget {
           },
         )),
 
-        Divider(height: Dimensions.PADDING_SIZE_EXTRA_SMALL, color: ColorResources.HINT_TEXT_COLOR),
+        const Divider(height: Dimensions.PADDING_SIZE_EXTRA_SMALL, color: ColorResources.HINT_TEXT_COLOR),
         Row(children: [
           Expanded(child: TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Cancel", style: montserratRegular.copyWith(color: ColorResources.getYellow(context))),
+            child: Text("${getTranslated('CANCEL', context)}", style: montserratRegular.copyWith(color: ColorResources.getYellow(context))),
           )),
           Container(
             height: 50,
-            padding: EdgeInsets.symmetric(vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+            padding: const EdgeInsets.symmetric(vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
             child: VerticalDivider(width: Dimensions.PADDING_SIZE_EXTRA_SMALL, color: Theme.of(context).hintColor),
           ),
           Expanded(child: TextButton(
@@ -69,7 +68,7 @@ class LanguageDialog extends StatelessWidget {
                 ));
               Navigator.pop(context);
             },
-            child: Text("Ok", style: montserratRegular.copyWith(color: ColorResources.GREEN)),
+            child: Text("${getTranslated('OK', context)}", style: montserratRegular.copyWith(color: ColorResources.GREEN)),
           )),
         ]),
 

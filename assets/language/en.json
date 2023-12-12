@@ -4,5 +4,19 @@
   "DASHBOARD": "Dashboard",
   "choose_language": "Choose Language",
   "CANCEL": "Cancel",
-  "OK": "Ok"
+  "OK": "Ok",
+  "LANGUAGE": "Language",
+  "SETTING": "Setting",
+  "COMMON": "Common",
+  "SORRY": "Sorry !",
+  "RETRY": "Retry",
+  "NO_DATA_FOUND": "No Data Found",
+  "NO_INTERNET": "No Internet Connection",
+  "DELETE_MSG": "Are You Sure You Want to Delete ?",
+  "EDIT": "Edit",
+  "DELETE": "Delete",
+  "YES": "Yes",
+  "NO": "No",
+  "VIEW": "View",
+  "QUOTATION": "Quotation"
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:water_tank_clean_service/helper/custom_delegate.dart';
 import 'package:water_tank_clean_service/localization/app_localization.dart';
@@ -74,6 +75,9 @@ class MyApp extends StatelessWidget {
       locale: Provider.of<LocalizationProvider>(context).locale,
       localizationsDelegates: [
         AppLocalization.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
         FallbackLocalizationDelegate()
       ],
       supportedLocales: locals,
